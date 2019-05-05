@@ -1,11 +1,77 @@
 package com.monografico.estudiantes;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class EstudiantesManager {
 
     public final static EstudiantesManager e = new EstudiantesManager();
+
+    private SharedPreferences estudiantesPreference;
+    private Context context;
+
+    public EstudiantesManager() {
+    }
+
+    public EstudiantesManager(Context context) {
+        this.estudiantesPreference = context.getSharedPreferences("estudiantes", 0);
+        this.context = context;
+
+    }
+
+
+    public void GuardarEstudiante(Estudiante estudiante){
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = estudiantesPreference.edit();
+        String json = gson.toJson(estudiante);
+        int nextId = estudiantesPreference.getInt("cantidadEstudiantes", 0) + 1;
+
+
+
+        editor.putInt("cantidadEstudiantes", nextId);
+        editor.putString(String.valueOf(nextId), json);
+        editor.commit();
+
+    }
+
+    public  void actualizar(Estudiante estudiante){
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = estudiantesPreference.edit();
+        String json = gson.toJson(estudiante);
+
+        editor.putString(String.valueOf(estudiante.id), json);
+        editor.commit();
+    }
+
+    public List<Estudiante> todos(){
+        List<Estudiante> estudiantes = new ArrayList<>();
+
+        int cantidadEstudiantes = estudiantesPreference.getInt("cantidadEstudiantes", 0);
+        Gson gson = new Gson();
+
+
+        //if(cantidadEstudiantes == 0 )
+            //return  null;
+
+        for (int i=0; i< cantidadEstudiantes; i++){
+            String numeroRegistro = estudiantesPreference.getString(String.valueOf(i),null);
+            if(numeroRegistro == null)
+                continue;
+
+            Estudiante e = gson.fromJson( numeroRegistro, Estudiante.class);
+
+            estudiantes.add(e);
+        }
+
+
+        return estudiantes;
+    }
 
     public List<Estudiante> estudiantesList(){
         List<Estudiante> estudiantes = new ArrayList<>();
@@ -20,4 +86,7 @@ public class EstudiantesManager {
 
         return estudiantes;
     }
+
+
+
 }

@@ -8,10 +8,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:id="@+id/rvPaises"
+        android:id="@+id/lvEstudiantes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
