@@ -13,6 +13,9 @@ public class Estudiante {
         this.photo = photo;
     }
 
+    public Estudiante() {
+    }
+
     public Long getId() {
         return id;
     }

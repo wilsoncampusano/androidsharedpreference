@@ -2,11 +2,13 @@ package com.monografico.estudiantes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class EstudiantesManager {
@@ -23,6 +25,10 @@ public class EstudiantesManager {
         this.estudiantesPreference = context.getSharedPreferences("estudiantes", 0);
         this.context = context;
 
+    }
+
+    public static EstudiantesManager build(Context context) {
+        return new EstudiantesManager(context);
     }
 
 
@@ -55,10 +61,6 @@ public class EstudiantesManager {
         int cantidadEstudiantes = estudiantesPreference.getInt("cantidadEstudiantes", 0);
         Gson gson = new Gson();
 
-
-        //if(cantidadEstudiantes == 0 )
-            //return  null;
-
         for (int i=0; i< cantidadEstudiantes; i++){
             String numeroRegistro = estudiantesPreference.getString(String.valueOf(i),null);
             if(numeroRegistro == null)
@@ -69,6 +71,14 @@ public class EstudiantesManager {
             estudiantes.add(e);
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            estudiantes.sort(new Comparator<Estudiante>() {
+               @Override
+               public int compare(Estudiante o1, Estudiante o2) {
+                   return o1.id.compareTo(o2.id);
+               }
+           });
+        }
 
         return estudiantes;
     }
