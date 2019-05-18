@@ -1,4 +1,4 @@
-package com.monografico.estudiantes;
+package com.monografico.estudiantes.modelos;
 
 public class Estudiante {
     public Long id;

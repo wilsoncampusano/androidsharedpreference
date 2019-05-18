@@ -1,11 +1,11 @@
-package com.monografico.estudiantes;
+package com.monografico.estudiantes.managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.monografico.estudiantes.modelos.Estudiante;
 
 import java.util.ArrayList;
 import java.util.Comparator;

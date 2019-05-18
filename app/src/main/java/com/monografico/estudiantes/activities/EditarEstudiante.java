@@ -1,4 +1,4 @@
-package com.monografico.estudiantes;
+package com.monografico.estudiantes.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
-import java.util.Objects;
+import com.monografico.estudiantes.modelos.Estudiante;
+import com.monografico.estudiantes.managers.EstudiantesManager;
+import com.monografico.estudiantes.R;
 
 public class EditarEstudiante extends AppCompatActivity {
 
