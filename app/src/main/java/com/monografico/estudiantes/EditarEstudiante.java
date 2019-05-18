@@ -78,6 +78,7 @@ public class EditarEstudiante extends AppCompatActivity {
         estudiante.apellido = apellido.getText().toString();
         estudiante.photo = urlFoto.getText().toString();
         EstudiantesManager.build(this).actualizar(estudiante);
+        onBackPressed();
     }
 
     private void crearEstudiante() {

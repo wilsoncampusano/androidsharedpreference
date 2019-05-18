@@ -46,10 +46,12 @@ public class AdapterEstudiantes extends BaseAdapter{
         Estudiante estudiante = estudiantes.get(position);
 
 
+        if (estudiante.photo != null && !estudiante.photo.isEmpty()){
+            Glide.with(context)
+                    .load(estudiante.photo)
+                    .into(photo);
+        }
 
-        Glide.with(context)
-                .load(estudiante.photo)
-                .into(photo);
 
         tvNombre.setText(estudiante.nombre);
         tvApellido.setText(estudiante.apellido);
